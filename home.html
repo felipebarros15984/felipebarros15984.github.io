@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerency</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.css" rel="stylesheet">
+    <link rel="shortcut icon" href="styles/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <main>
+        <nav class="navbar bg-body-tertiary fixed-top">
+            <div class="container-fluid">
+                <div class="d-flex nav-link">
+                    <button class=" navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <img class="logo m-1" src="styles/img/logo.png" alt="">
+                    <a class="navbar-brand ms-2 text-secondary" href="home.html">Gerency > <span
+                            class="text-dark">Home</span></a>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="ms-auto me-3 text-secondary">
+                        <i id="user" class="bi bi-person-circle mr-4">
+                        </i>
+                    </div>
+                </div>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <button type="button" class="btn-close m-2" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav">
+                            <li class="nav-item m-3">
+                                <a href="home.html" class="active">
+                                    <span class="me-2">
+                                        <i class="bi bi-house-door ms-3"></i>
+                                    </span>
+                                    <span id="home">Home</span>
+                                </a>
+                            </li>
+                            <li class="nav-item m-3">
+                                <a href="historico.html">
+                                    <span class="me-2">
+                                        <i class="bi bi-clock-history ms-3"></i>
+                                    </span>
+                                    <span id="historico">Histórico</span>
+                                </a>
+                            </li>
+                            <li class="nav-item m-3">
+                                <a href="meta.html">
+                                    <span class="me-2">
+                                        <i class="bi bi-bookmark-check ms-3"></i>
+                                    </span>
+                                    <span id="metas">Metas</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 text-center">
+                <div class="col ">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title info">Saldo</h3>
+                            <h4 class="text-secondary value mt-4" id="saldo">R$ ------</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title info">Receitas</h3>
+                            <h4 class="text-secondary text-success value mt-4" id="totalReceitas">R$ ------</h4>
+                            <button type="button" class="btn btn-sm template-btn float-end" data-bs-toggle="modal"
+                                data-bs-target="#adicionarLançamento" onclick="saveModal('Receitas')" id="adcReceita">
+                                <i class="bi bi-plus-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title info">Despesas</h3>
+                            <h4 class="text-secondary text-danger value mt-4" id="totalDespesas">R$ ------</h4>
+                            <button type="button" class="btn btn-sm template-btn float-end" data-bs-toggle="modal"
+                                data-bs-target="#adicionarLançamento" onclick="saveModal('Despesas')" id="adcDespesa">
+                                <i class="bi bi-plus-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-2 text-center">
+                <div class="col ">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title info">Histórico</h3>
+                            <h4 class="text-secondary text-secondary value mt-2">Gerencie seu histórico.</h4>
+                            <a href="historico.html">
+                                <button type="button" class="btn btn-dark btn-sm template-btn float-center connection"
+                                    id="gerencieHistorico">
+                                    Gerencie
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body ">
+                            <h3 class="card-title info">Metas</h3>
+                            <h4 class="text-secondary text-secondary value mt-2" id="totalMetas">R$ -500,00</h4>
+                            <button type="button" class="btn btn-sm template-btn float-end" data-bs-toggle="modal"
+                                data-bs-target="#adicionarLançamento" onclick="saveModal('Metas')" id="adcMeta">
+                                <i class="bi bi-plus-circle"></i>
+                            </button>
+                            <div class="d-flex flex-column align-items-center">
+                                <a href="meta.html">
+                                    <button type="button" class="btn btn-dark btn-sm template-btn connection gerencie">
+                                        Gerencie
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-1 text-center">
+                <div class="col ">
+                    <h3 class="card-title info mt-3">Relatórios</h3>
+                    <div class="card relatorio">
+                        <div class="card-body text-start p-5" id="relatorio">
+                            <h2>Relatório Financeiro: Últimos 7 dias</h2>
+                            <h3>Período: 01/05/2024 - 08/04/2024</h3>
+                            <!--Resumo-->
+                            <h3 class="mb-3">Resumo Financeiro: <span class="text-secondary">Saldo</span></h3>
+                            <p>Há 7 dias, seu saldo era de <span class="text-primary">R$ 100,00</span>. Neste momento
+                                seu saldo atinge <span class="text-primary">R$ -200,00</span>.</p>
+                            <!--analise  de movimentações-->
+                            <br>
+                            <h3 class="mb-3">Análise de Movimentação</h3>
+                            <p>Receitas: R$ 300,00</p>
+                            <p>Despesas: R$ -100,00</p>
+                            <p>Metas: R$ -500,00</p>
+                            <br>
+                            <!--analise detalhada-->
+                            <h3 class="mb-3">Análise Detalhada:</h3>
+                            <p class="text-primary">Saldo Inicial: R$ 100,00</p>
+                            <p>Receita Adicional: R$ 300,00</p>
+                            <p>Despesa: R$ -100,00</p>
+                            <p>Reserva para Metas: R$ -500,00</p>
+                            <p class="text-primary">Saldo Final: R$ -200,00</p>
+                            <br>
+                            <!--Conclusão-->
+                            <h3 class="mb-3">Conclusão</h3>
+                            <p>Nesta data seu saldo se apresenta negativo. É importante observar que suas receitas não
+                                cobrem suas despesas e metas. Será necessário buscar mais controle sobre suas finanças.
+                                Cogite buscar novas formas de renda e economizar mais nos próximos dias.
+                            </p>
+                            <div class="download-btn-container">
+                                <button id="download-btn"><i class="bi bi-cloud-arrow-down"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-5 text-center row-buttons">
+            <div class="col mb-5">
+                <div class="relatorio-buttons-container">
+                    <select class="btn btn-dark custom-select">
+                        <option selected>Filtrar período</option>
+                        <option value="1">Últimos 7 dias</option>
+                        <option value="2">Últimos 15 dias</option>
+                        <option value="3">Últimos 30 dias</option>
+                        <option value="3">Últimos 60 dias</option>
+                        <option value="3">Últimos 90 dias</option>
+                    </select>
+                    <button class="btn btn-secondary">Saldo</button>
+                    <button class="btn btn-secondary">Receitas</button>
+                    <button class="btn btn-secondary">Despesas</button>
+                    <button class="btn btn-secondary">Metas</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Modal -->
+    <div class="modal fade" id="adicionarLançamento" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Adicionar Lançamento </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="" for="">Descrição</label>
+                            <input type="text" class="form-control" id="descricao">
+                            <div id="descricaoError" class="error-message text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="inputState" class="form-label text-muted">Valor</label>
+                            <input type="text" class="form-control" id="valor">
+                            <div id="valorError" class="error-message text-danger"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputState" class="form-label text-muted">Data</label>
+                            <input type="date" class="form-control" id="date">
+                            <div id="dataError" class="error-message text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="inputState" class="form-label text-muted">Categoria</label>
+                            <select class="form-control" id="categoria">
+                                <option value="0">Selecione a categoria</option>
+                                <!--Receitas-->
+                                <option value="1">Salário</option>
+                                <option value="2">Bônus</option>
+                                <option value="3">Freelance/Consultoria:</option>
+                                <option value="4">Rendimento de Investimentos:</option>
+                                <option value="5">Aluguel/Arrendamento:</option>
+                                <option value="6">Pensão/Previdência:</option>
+                                <option value="7">Comissões/Vendas:</option>
+                                <option value="8">Bolsa de Estudos/Bolsa de Pesquisa:</option>
+                                <option value="9">Prêmios/Ganhos:</option>
+                                <!--Despesas-->
+                                <option value="10">Moradia</option>
+                                <option value="11">Alimentação</option>
+                                <option value="12">Transporte</option>
+                                <option value="13">Saúde</option>
+                                <option value="14">Educação</option>
+                                <option value="15">Lazer e Entretenimento</option>
+                                <option value="16">Vestuário e Acessórios</option>
+                                <option value="17">Contas Domésticas</option>
+                                <option value="18">Seguros</option>
+                                <option value="19">Impostos e Taxas</option>
+                                <option value="20">Doações e Caridade</option>
+                                <option value="21">Dívidas e Empréstimos</option>
+                                <!--Metas-->
+                                <option value="22">Economias e Investimentos</option>
+                                <option value="23">Viagem</option>
+                                <option value="24">Fundo de Emergência</option>
+                                <option value="25">Educação Continuada</option>
+                                <option value="26">Aquisição de Bens</option>
+                                <option value="27">Aposentadoria</option>
+                                <option value="28">Fundo de Reserva</option>
+                                <option value="29">Objetivos Financeiros Específicos</option>
+                                <!--geral-->
+                                <option value="30">Outros</option>
+                            </select>
+                            <div id="categoriaError" class="error-message text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-success" onclick="validateAndSaveModal(type)">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script src="//cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js"></script>
+    <script>
+
+        document.getElementById('download-btn').addEventListener('click', function () {
+            var relatorioContent = document.getElementById('relatorio').innerText; // Use innerText em vez de innerHTML
+
+            var blob = new Blob([relatorioContent], { type: 'text/plain' }); // Use 'text/plain' como tipo MIME para texto simples
+
+            var url = URL.createObjectURL(blob);
+
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'relatorio.txt'; // Mude a extensão do arquivo para .txt
+            a.click();
+
+            // Limpe o URL do objeto após o download
+            URL.revokeObjectURL(url);
+        });
+
+        function validateAndSaveModal(type) {
+            // validação dos campos do modal
+            let descricao = document.getElementById('descricao').value;
+            let valorString = document.getElementById('valor').value;
+            // Substituir vírgula por ponto
+            let valor = parseFloat(valorString.replace(',', '.'));
+            let date = document.getElementById('date').value;
+            let categoria = document.getElementById('categoria').value;
+            let descricaoError = document.getElementById('descricaoError');
+            let valorError = document.getElementById('valorError');
+            let dataError = document.getElementById('dataError');
+            let categoriaError = document.getElementById('categoriaError');
+            descricaoError.innerHTML = '';
+            valorError.innerHTML = '';
+            dataError.innerHTML = '';
+            categoriaError.innerHTML = '';
+            let isValid = true;
+            if (descricao.trim() === '') {
+                descricaoError.innerHTML = 'Por favor, digite uma descrição';
+                isValid = false;
+            }
+            if (isNaN(valor) || valorString.trim() === '') {
+                valorError.innerHTML = 'Por favor, digite um valor numérico';
+                isValid = false;
+            }
+            if (date.trim() === '') {
+                dataError.innerHTML = 'Por favor, digite uma data';
+                isValid = false;
+            }
+            if (categoria.trim() === '') {
+                categoriaError.innerHTML = 'Por favor, selecione uma categoria';
+                isValid = false;
+            }
+            // se todos os campos forem válidos, salva os dados e fecha o modal
+            if (isValid) {
+                // recuperar dados antigos ou inicializar array vazio
+                let existingData = JSON.parse(localStorage.getItem('lançamentos')) || [];
+                // salvamento dos dados
+                const newData = {
+                    descricao: descricao,
+                    valor: valor,
+                    date: date,
+                    categoria: categoria,
+                    tipo: type
+                };
+                existingData.push(newData);
+                // salvar dados atualizados
+                localStorage.setItem('lançamentos', JSON.stringify(existingData));
+                // atualizar tabela na outra página
+                updateTable(type);
+                // Atualizar saldo
+                saldo();
+                receita();
+                // Atualizar despesas
+                despesa();
+                // Atualizar metas
+                meta();
+                console.log(existingData);
+                $('#adicionarLançamento').modal('hide');
+            }
+            $('#adicionarLançamento').on('hidden.bs.modal', function () {
+                // Limpar os campos do modal
+                $('#descricao').val('');
+                $('#valor').val('');
+                $('#date').val('');
+                $('#categoria').val('');
+                validateAndSaveModal(modalType);
+            });
+            $('#adicionarLançamento').on('show.bs.modal', function () {
+                $('#descricaoError').html('');
+                $('#valorError').html('');
+                $('#dataError').html('');
+                $('#categoriaError').html('');
+            });
+        }
+
+
+        function updateTable(type) {
+        }
+
+        let modalType;
+
+        function saveModal(type) {
+            modalType = type;
+            var modalTitle = document.getElementById("modalTitle");
+            if (type === 'Receitas') {
+                modalTitle.innerHTML = "Adicionar Receita";
+            } else if (type === 'Despesas') {
+                modalTitle.innerHTML = "Adicionar Despesa";
+            } else if (type === 'Metas') {
+                modalTitle.innerHTML = "Adicionar Meta";
+            }
+        }
+
+        $('#adicionarLançamento').on('hidden.bs.modal', function () {
+            validateAndSaveModal(modalType);
+        });
+
+        //card de saldo
+        function saldo() {
+            let lancamentos = JSON.parse(localStorage.getItem('lançamentos')) || [];
+            let totalReceitas = 0;
+            let totalDespesas = 0;
+            let totalMetas = 0;
+
+            lancamentos.forEach(function (lancamento) {
+                if (lancamento.tipo === 'Receitas') {
+                    totalReceitas += parseFloat(lancamento.valor);
+                } else if (lancamento.tipo === 'Despesas') {
+                    totalDespesas += parseFloat(lancamento.valor);
+                } else if (lancamento.tipo === 'Metas') {
+                    totalMetas += parseFloat(lancamento.valor);
+                }
+            });
+            // calcular saldo
+            let saldo = totalReceitas - totalDespesas - totalMetas;
+
+            let saldoFormatado = saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            // Atualizar o elemento HTML que exibe o saldo
+            document.getElementById('saldo').innerHTML = saldoFormatado;
+        }
+        window.addEventListener('load', function () {
+            saldo();
+        });
+
+        //card de receita
+        function receita() {
+            let lancamentos = JSON.parse(localStorage.getItem('lançamentos')) || [];
+            let totalReceitas = 0;
+
+            lancamentos.forEach(function (lancamento) {
+                if (lancamento.tipo === 'Receitas') {
+                    totalReceitas += parseFloat(lancamento.valor);
+                }
+            });
+            // calcular saldo
+            let receita = totalReceitas;
+
+            let receitaFormatada = receita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            // Atualizar o elemento HTML que exibe o saldo
+            document.getElementById('totalReceitas').innerHTML = receitaFormatada;
+        }
+        window.addEventListener('load', function () {
+            receita();
+        });
+
+        //card de despesa
+        function despesa() {
+            let lancamentos = JSON.parse(localStorage.getItem('lançamentos')) || [];
+            let totalDespesas = 0;
+
+            lancamentos.forEach(function (lancamento) {
+                if (lancamento.tipo === 'Despesas') {
+                    totalDespesas += parseFloat(lancamento.valor);
+                }
+            });
+            // calcular saldo
+            let despesa = totalDespesas;
+
+            let despesaFormatada = despesa.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            // Atualizar o elemento HTML que exibe o saldo
+            document.getElementById('totalDespesas').innerHTML = despesaFormatada;
+        }
+        window.addEventListener('load', function () {
+            despesa();
+        });
+
+        //card de meta
+        function meta() {
+            let lancamentos = JSON.parse(localStorage.getItem('lançamentos')) || [];
+            let totalMetas = 0;
+
+            lancamentos.forEach(function (lancamento) {
+                if (lancamento.tipo === 'Metas') {
+                    totalMetas += parseFloat(lancamento.valor);
+                }
+            });
+            // calcular saldo
+            let meta = totalMetas;
+
+            let metaFormatada = meta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            // Atualizar o elemento HTML que exibe o saldo
+            document.getElementById('totalMetas').innerHTML = metaFormatada;
+        }
+        window.addEventListener('load', function () {
+            meta();
+        });
+
+
+    </script>
+
+</body>
+
+</html>
